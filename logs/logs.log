@@ -1,0 +1,5 @@
+[2m2025-04-21T22:48:08.135810Z[0m [32m INFO[0m [2mlogger::init[0m[2m:[0m Logger initialised at Level(Debug) level
+[2m2025-04-21T22:48:08.140256Z[0m [34mDEBUG[0m [2msqlx_postgres::options::pgpass[0m[2m:[0m `.pgpass` file not found [3mpath[0m[2m=[0m/Users/ericmurray/.pgpass
+[2m2025-04-21T22:48:08.150581Z[0m [32m INFO[0m [2mcli_tools[0m[2m:[0m DB Url Established and Pool created [3mdb_url[0m[2m=[0mpostgres://localhost/thp_dev
+[2m2025-04-21T22:48:14.327935Z[0m [32m INFO[0m [2mcli_tools[0m[2m:[0m User selected an option [3mselection[0m[2m=[0m0
+

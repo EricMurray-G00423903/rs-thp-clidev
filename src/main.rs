@@ -3,7 +3,7 @@ mod cmds;
 use cmds::seed;
 use sqlx::PgPool;
 use std::io::stdin;
-use logger::init::{init_logger, init_logger_stdout};
+use logger::init::init_logger_stdout;
 use tracing::{info, error};
 
 #[tokio::main]
@@ -83,7 +83,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     }
 
-    Ok(())
+    //Ok(())
 
 }
 

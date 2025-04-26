@@ -1,52 +1,13 @@
-use std::string;
-
 use sqlx::PgPool;
-use serde_json::{json, Value};
+use serde_json::json;
 use tracing::{error, info};
 use uuid::Uuid;
-use chrono::{DateTime, Utc};
 use fake::faker::internet::en::SafeEmail;
 use fake::faker::company::en::CompanyName;
 use fake::faker::address::en::CityName;
 use fake::Fake;
-use argon2::{
-    password_hash::{
-        self, rand_core::OsRng, PasswordHash, PasswordHasher, SaltString
-    },
-    Argon2
-};
-struct User {
-    id: Uuid,
-    email: String,
-    password_hash: String,
-    created_at: chrono::DateTime<chrono::Utc>,
-}
-
-struct Business {
-    id: Uuid,
-    name: String,
-    description: String,
-    owner_id: Uuid,
-    created_at: chrono::DateTime<chrono::Utc>,
-}
-
-struct Activity {
-    id: Uuid,
-    business_id: Uuid,
-    title: String,
-    location: String,
-    capacity: u32,
-    time: chrono::DateTime<chrono::Utc>,
-    equipment: Value,
-    created_at: chrono::DateTime<chrono::Utc>,
-}
-
-struct Booking {
-    id: Uuid,
-    user_id: Uuid,
-    activity_id: Uuid,
-    booked_at: chrono::DateTime<chrono::Utc>,
-}
+use argon2::{ password_hash::{ rand_core::OsRng, PasswordHasher, SaltString }, Argon2 };
+use models::*;
 
 pub async fn create_tables(pool: &PgPool) -> Result<(), sqlx::Error> {
     info!("Create tables called");
@@ -129,7 +90,7 @@ pub async fn seed_users(pool: &PgPool, total_users: u32) -> Result<(), sqlx::Err
         let password_hash = match argon2.hash_password(password, &salt) {
             Ok(hash) => hash.to_string(),
             Err(e) => {
-                error!("Error creating password hash");
+                error!(%e, "Error creating password hash");
                 continue;
             }
         };
